@@ -19,6 +19,19 @@
         // Set some random cookies
         document.cookie = "random_cookie1=value1; path=/";
         document.cookie = "random_cookie2=value2; path=/";
+        
+        // Set a cookie with a 15-minute duration
+        function setCookie(name, value, minutes) {
+            var date = new Date();
+            date.setTime(date.getTime() + (minutes * 60 * 1000));
+            var expires = "expires=" + date.toUTCString();
+            document.cookie = name + "=" + value + "; " + expires + "; path=/";
+        }
+
+        // Set a cookie named 'session_cookie' with a value of 'true' and a 15-minute duration
+        setCookie('session_cookie', 'true', 15);
+    
+
     </script>
 </body>
 </html>
