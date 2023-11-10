@@ -18,13 +18,19 @@
         document.cookie = "random_cookie1=value1; path=/";
         document.cookie = "random_cookie2=value2; path=/";
         
-        // Set a cookie with a 15-minute duration
-        function setCookie(name, value, minutes) {
-            var date = new Date();
-            date.setTime(date.getTime() + (minutes * 60 * 1000));
-            var expires = "expires=" + date.toUTCString();
-            document.cookie = name + "=" + value + "; " + expires + "; path=/";
-        }
+    function setCookie(name, value, minutes) {
+        var date = new Date();
+        // Convert the time to UTC
+        var utcTime = date.getTime() + date.getTimezoneOffset() * 60000;
+        // Set the expiration time
+        date.setTime(utcTime + (minutes * 60 * 1000));
+        var expires = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + value + "; " + expires + "; path=/";
+}
+
+// Example: Set a cookie named 'username' with the value 'John Smith' and a 15-minute duration
+setCookie('username', 'John Smith', 15);
+
 
         // Set a cookie named 'session_cookie' with a value of 'true' and a 15-minute duration
         setCookie('session_cookie', 'true', 15);
